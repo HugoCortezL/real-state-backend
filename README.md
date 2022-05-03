@@ -23,7 +23,7 @@ This project is being developed to implement my portfolio and show my backend kn
 <h2 id="Features">Features 🔥</h2>
 
 * [X] Basic Type API
-* [ ] Basic Additional API
+* [X] Basic Additional API
 * [ ] Basic User API
 * [ ] Basic Announcement API
 * [ ] Filter Announcements

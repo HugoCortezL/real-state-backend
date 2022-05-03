@@ -1,4 +1,4 @@
-export type Type = {
+export type Additional = {
     id: number,
     createAt: Date,
     updatedAt: Date,

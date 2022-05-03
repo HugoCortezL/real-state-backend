@@ -12,7 +12,6 @@ const getAllTypes = async(req:Request, res:Response) => {
 
 const getTypeById = async(req:Request, res:Response) => {
     const id = parseInt(req.params.id)
-    console.log(id)
     try{
         const type = await typeService.getTypeByIdService(id)
         res.status(200).send(type)
@@ -38,7 +37,6 @@ const createType = async(req:Request, res:Response) => {
 const updateType = async(req:Request, res:Response) => {
     const id = parseInt(req.params.id)
     const type = req.body
-    console.log(id)
     try{
         const typeUpdated = await typeService.updateTypeService(id, type)
         if(typeUpdated){
