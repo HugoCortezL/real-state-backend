@@ -27,7 +27,7 @@ This project is being developed to implement my portfolio and show my backend kn
 * [ ] Basic User API
 * [ ] Basic Announcement API
 * [ ] Filter Announcements
-* [X] Sort Announcements
+* [ ] Sort Announcements
 * [ ] Create pagination in Announcements
 
 <h2 id="pre">Prerequisites ✏️</h2>
