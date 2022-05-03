@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+
+model User{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  username String @db.VarChar(50) @unique
+  email String @db.VarChar(100) @unique
+  password String @db.VarChar(30)
+  announcements Announcement[]
+  favoritsAnnouncements UserFavoritesAnnouncments[]
+}
+
+model Announcement{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  city String @db.VarChar(50)
+  state String @db.VarChar(50)
+  price Float
+  rooms Int
+  bathrooms Int
+  garage Int
+  area Int
+  condominium Int?
+  ipva Int?
+  furnished Boolean @default(false)
+  type Type @relation(fields: [typeId], references: [id])
+  typeId Int
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  announcements AdditioinalOnAnnouncement[]
+  users UserFavoritesAnnouncments[]
+}
+
+model Type{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(30) @unique
+  announcements Announcement[]
+}
+
+model Additional{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(30) @unique
+  announcements AdditioinalOnAnnouncement[]
+}
+
+model AdditioinalOnAnnouncement{
+  additional Additional @relation(fields: [additionalId], references: [id])
+  additionalId Int
+  announcement Announcement @relation(fields: [announcementId], references: [id])
+  announcementId Int
+  assignedAt DateTime @default(now())
+
+  @@id([additionalId, announcementId])
+}
+
+model UserFavoritesAnnouncments{
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  announcement Announcement @relation(fields: [announcementId], references: [id])
+  announcementId Int
+
+  @@id([userId, announcementId])
+}
